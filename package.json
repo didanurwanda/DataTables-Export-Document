@@ -1,0 +1,30 @@
+{
+  "name": "datatables-export-document",
+  "version": "1.0.0",
+  "description": "Export your grid data to many document. Support doc, xls, pdf, csv, xml, html, and print out.",
+  "main": "dataTables.export.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/didanurwanda/DataTables-Export-Document.git"
+  },
+  "keywords": [
+    "datatables",
+    "export",
+    "word",
+    "excel",
+    "csv",
+    "pdf",
+    "print",
+    "xml",
+    "datatables-export"
+  ],
+  "author": "Dida Nurwanda",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/didanurwanda/DataTables-Export-Document/issues"
+  },
+  "homepage": "https://github.com/didanurwanda/DataTables-Export-Document"
+}
