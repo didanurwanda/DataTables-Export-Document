@@ -438,7 +438,7 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
                 for (var fieldIndex in settings.fields) {
                     var field = settings.fields[fieldIndex];
                     dataRow.push({
-                        text: item[field],
+                        text: item[field] == null ? '' : item[field],
                         style: i % 2 ? 'tableBodyEven' : 'tableBodyOdd'
                     });
                 }
