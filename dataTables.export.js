@@ -298,7 +298,7 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
                 var tr = '<tr>';
                 for (var fieldIndex in settings.fields) {
                     var field = settings.fields[fieldIndex];
-                    tr += '<td>' + row[field] + '</td>';
+                    tr += '<td>' + (row[field] == null ? '' : row[field]) + '</td>';
                 }
                 tr += "</tr>\n";
                 tbody += tr;
@@ -344,7 +344,7 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
                 var tr = '<tr>';
                 for (var fieldIndex in settings.fields) {
                     var field = settings.fields[fieldIndex];
-                    tr += '<td>' + row[field] + '</td>';
+                    tr += '<td>' + (row[field] == null ? '' : row[field]) + '</td>';
                 }
                 tr += "</tr>\n";
                 tbody += tr;
@@ -388,16 +388,16 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
                 var row = _data[i];
                 for (var fieldIndex in settings.fields) {
                     var field = settings.fields[fieldIndex];
-                    tbody += row[field] + settings.separator;
+                    tbody += (row[field] == null ? '' : row[field]) + settings.separator;
                 }
                 tbody += "\n";
             }
             var output = "";
             if (settings.title != '') {
-                output += settings.title += "\n";
+            //    output += settings.title += "\n";
             }
             if (settings.message != '') {
-                output += settings.message += "\n";
+            //    output += settings.message += "\n";
             }
             if (settings.header.length > 0) {
                 output += thead;
@@ -544,7 +544,7 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
                 var tr = '<tr>';
                 for (var fieldIndex in settings.fields) {
                     var field = settings.fields[fieldIndex];
-                    tr += '<td>' + row[field] + '</td>';
+                    tr += '<td>' + (row[field] == null ? '' : row[field]) + '</td>';
                 }
                 tr += "</tr>\n";
                 tbody += tr;
@@ -599,7 +599,7 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
                 var row = _data[i];
                 for (var fieldIndex in settings.fields) {
                     var field = settings.fields[fieldIndex];
-                    output += "\t\t<" + field + ">" + row[field] + "</" + field + ">\n";
+                    output += "\t\t<" + field + ">" + (row[field] == null ? '' : row[field]) + "</" + field + ">\n";
                 }
                 output += "\t</Column>\n";
             }
