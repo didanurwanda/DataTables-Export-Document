@@ -640,6 +640,7 @@ tbody tr:nth-child(odd) {\
             } else {
                 var win = window.open('', '');
                 win.document.close();
+                win.document.head.innerHTML = '<title>'+ title +'</title>';
                 win.document.body.innerHTML = output;
                 setTimeout(function() {
                     if (settings.print) {
