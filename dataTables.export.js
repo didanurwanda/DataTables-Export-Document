@@ -321,14 +321,13 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
 
             var charset = '';
             if (settings.charset != '') {
-                charset = ';charset='+ settings.charset;
+                charset = settings.charset;
             } else {
-                var cst = document.characterSet || document.charset;
-                charset = ';charset='+ cst;
+                charset = document.characterSet || document.charset;
             }
 
             saveAs(new Blob(["\ufeff", templateHeader + output + templateFooter], {
-                type: 'application/msword'+ charset,
+                type: 'application/msword;charset='+ charset,
                 encoding: charset
             }), settings.filename + '.doc');
         },
@@ -378,14 +377,13 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
 
             var charset = '';
             if (settings.charset != '') {
-                charset = ';charset='+ settings.charset;
+                charset = settings.charset;
             } else {
-                var cst = document.characterSet || document.charset;
-                charset = ';charset='+ cst;
+                charset = document.characterSet || document.charset;
             }
 
             saveAs(new Blob(["\ufeff", output], {
-                type: 'application/msexcel'+ charset,
+                type: 'application/msexcel;charset='+ charset,
                 encoding: charset
             }), settings.filename + '.xls');
         },
@@ -429,14 +427,13 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
 
             var charset = '';
             if (settings.charset != '') {
-                charset = ';charset='+ settings.charset;
+                charset = settings.charset;
             } else {
-                var cst = document.characterSet || document.charset;
-                charset = ';charset='+ cst;
+                charset = document.characterSet || document.charset;
             }
 
             saveAs(new Blob(["\ufeff", output], {
-                type: 'text/csv'+ charset,
+                type: 'text/csv;charset='+ charset,
                 encoding: charset
             }), settings.filename + '.csv');
         },
@@ -545,10 +542,9 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
             
             var charset = '';
             if (settings.charset != '') {
-                charset = ';charset='+ settings.charset;
+                charset = settings.charset;
             } else {
-                var cst = document.characterSet || document.charset;
-                charset = ';charset='+ cst;
+                charset = document.characterSet || document.charset;
             }
 
             var pdf = window.pdfMake.createPdf(doc);
@@ -557,7 +553,7 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
             } else {
                 pdf.getBuffer(function(buffer) {
                     var blob = new Blob(["\ufeff", buffer], {
-                        type: 'application/pdf'+ charset,
+                        type: 'application/pdf;charset='+ charset,
                         encoding: charset
                     });
                     saveAs(blob, settings.filename + '.pdf');
@@ -616,10 +612,9 @@ tbody tr:nth-child(odd) {\
 }';
             var charset = '';
             if (settings.charset != '') {
-                charset = ';charset='+ settings.charset;
+                charset = settings.charset;
             } else {
-                var cst = document.characterSet || document.charset;
-                charset = ';charset='+ cst;
+                charset = document.characterSet || document.charset;
             }
 
             var title = settings.title;
@@ -633,7 +628,7 @@ tbody tr:nth-child(odd) {\
 
             if (settings.download == true) {
                 var blob = new Blob(["\ufeff", '<body>'+ output +'</body>'], {
-                    type: 'application/html'+ charset,
+                    type: 'application/html;charset='+ charset,
                     encoding: charset
                 });
                 saveAs(blob, settings.filename + '.html');
@@ -683,14 +678,13 @@ tbody tr:nth-child(odd) {\
 
             var charset = '';
             if (settings.charset != '') {
-                charset = ';charset='+ settings.charset;
+                charset = settings.charset;
             } else {
-                var cst = document.characterSet || document.charset;
-                charset = ';charset='+ cst;
+                charset = document.characterSet || document.charset;
             }
 
             saveAs(new Blob(["\ufeff", output], {
-                type: 'application/xml'+ charset,
+                type: 'application/xml;charset='+ charset,
                 encoding: charset
             }), settings.filename + '.xml');
         },
