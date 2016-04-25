@@ -327,7 +327,7 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
                 charset = ';charset='+ cst;
             }
 
-            saveAs(new Blob([templateHeader + output + templateFooter], {
+            saveAs(new Blob(["\ufeff", templateHeader + output + templateFooter], {
                 type: 'application/msword'+ charset,
                 encoding: charset
             }), settings.filename + '.doc');
@@ -384,7 +384,7 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
                 charset = ';charset='+ cst;
             }
 
-            saveAs(new Blob([output], {
+            saveAs(new Blob(["\ufeff", output], {
                 type: 'application/msexcel'+ charset,
                 encoding: charset
             }), settings.filename + '.xls');
@@ -435,7 +435,7 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
                 charset = ';charset='+ cst;
             }
 
-            saveAs(new Blob([output], {
+            saveAs(new Blob(["\ufeff", output], {
                 type: 'text/csv'+ charset,
                 encoding: charset
             }), settings.filename + '.csv');
@@ -556,7 +556,7 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
                 pdf.open();
             } else {
                 pdf.getBuffer(function(buffer) {
-                    var blob = new Blob([buffer], {
+                    var blob = new Blob(["\ufeff", buffer], {
                         type: 'application/pdf'+ charset,
                         encoding: charset
                     });
@@ -571,7 +571,9 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
                 title: '',
                 message: '',
                 filename: 'document',
-                print: false
+                print: false,
+                download: true,
+                charset: ''
             };
             $.extend(true, settings, config);
             var _data = dt.rows().data();
@@ -594,35 +596,63 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
                 tbody += tr;
             }
             tbody += '</tbody>';
-            var className = dt.table().node().className.replace(/collapsed/gi, '');
-            var html = '<table class="' + className + '">';
-            if (settings.header.length > 0) {
-                html += thead;
+            var css = 'body {\
+  font: normal medium/1.2 sans-serif;\
+}\
+table {\
+  border-collapse: collapse;\
+  width: 100%;\
+}\
+th, td {\
+  padding: 0.25rem;\
+  text-align: left;\
+  border: 1px solid #ccc;\
+}\
+th {\
+    text-align: center;\
+}\
+tbody tr:nth-child(odd) {\
+  background: #eee;\
+}';
+            var charset = '';
+            if (settings.charset != '') {
+                charset = ';charset='+ settings.charset;
+            } else {
+                var cst = document.characterSet || document.charset;
+                charset = ';charset='+ cst;
             }
-            html += tbody;
-            html += '</table>';
-            var win = window.open('', '');
+
             var title = settings.title;
             if (title == '') {
                 title = $('title').text();
             }
-            win.document.close();
-            var head = '<title>' + title + '</title>';
-            $('style, link').each(function(index, el) {
-                head += relToAbs(this);
-            });
-            win.document.head.innerHTML = head;
-            win.document.body.innerHTML = '<center><h1>' + title + '</h1></center>' + (settings.message != '' ? '<center><p>' + settings.message + '</p></center>' : '') + html;
-            setTimeout(function() {
-                if (settings.print) {
-                    win.print();
-                    win.close();
-                }
-            }, 250);
+            var table = '';
+            table += '<style rel="stylesheet">'+ css +'</style>';
+            table += '<table>' + thead + tbody + '</table>';
+            var output = '<center><h1>' + title + '</h1></center>' + (settings.message != '' ? '<center><p>' + settings.message + '</p></center>' : '') + table;
+
+            if (settings.download == true) {
+                var blob = new Blob(["\ufeff", '<body>'+ output +'</body>'], {
+                    type: 'application/html'+ charset,
+                    encoding: charset
+                });
+                saveAs(blob, settings.filename + '.html');
+            } else {
+                var win = window.open('', '');
+                win.document.close();
+                win.document.body.innerHTML = output;
+                setTimeout(function() {
+                    if (settings.print) {
+                        win.print();
+                        win.close();
+                    }
+                }, 250);
+            }
         },
         print: function(dt, config) {
             this.html(dt, $.extend({}, config, {
-                print: true
+                print: true,
+                download: false
             }));
         },
         xml: function(dt, config) {
@@ -658,7 +688,7 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
                 charset = ';charset='+ cst;
             }
 
-            saveAs(new Blob([output], {
+            saveAs(new Blob(["\ufeff", output], {
                 type: 'application/xml'+ charset,
                 encoding: charset
             }), settings.filename + '.xml');
