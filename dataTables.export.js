@@ -255,7 +255,8 @@
                 orientation: 'potrait',
                 title: '',
                 message: '',
-                filename: 'document'
+                filename: 'document',
+                charset: ''
             };
             $.extend(true, settings, config);
             var _data = dt.rows().data();
@@ -317,8 +318,18 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
             }
             output += tbody;
             output += '</table>';
+
+            var charset = '';
+            if (settings.charset != '') {
+                charset = ';charset='+ settings.charset;
+            } else {
+                var cst = document.characterSet || document.charset;
+                charset = ';charset='+ cst;
+            }
+
             saveAs(new Blob([templateHeader + output + templateFooter], {
-                mimeType: 'application/msword'
+                type: 'application/msword'+ charset,
+                encoding: charset
             }), settings.filename + '.doc');
         },
         excel: function(dt, config) {
@@ -327,7 +338,8 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
                 header: [],
                 title: '',
                 message: '',
-                filename: 'document'
+                filename: 'document',
+                charset: ''
             };
             $.extend(true, settings, config);
             var _data = dt.rows().data();
@@ -363,8 +375,18 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
             }
             output += tbody;
             output += '</table>';
+
+            var charset = '';
+            if (settings.charset != '') {
+                charset = ';charset='+ settings.charset;
+            } else {
+                var cst = document.characterSet || document.charset;
+                charset = ';charset='+ cst;
+            }
+
             saveAs(new Blob([output], {
-                mimeType: 'application/msexcel'
+                type: 'application/msexcel'+ charset,
+                encoding: charset
             }), settings.filename + '.xls');
         },
         csv: function(dt, config) {
@@ -374,7 +396,8 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
                 separator: ',',
                 title: '',
                 message: '',
-                filename: 'document'
+                filename: 'document',
+                charset: ''
             };
             $.extend(true, settings, config);
             var _data = dt.rows().data();
@@ -403,8 +426,18 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
                 output += thead;
             }
             output += tbody;
+
+            var charset = '';
+            if (settings.charset != '') {
+                charset = ';charset='+ settings.charset;
+            } else {
+                var cst = document.characterSet || document.charset;
+                charset = ';charset='+ cst;
+            }
+
             saveAs(new Blob([output], {
-                mimeType: 'application/x-csv'
+                type: 'text/csv'+ charset,
+                encoding: charset
             }), settings.filename + '.csv');
         },
         pdf: function(dt, config) {
@@ -417,7 +450,8 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
                 pageSize: 'A4',
                 title: '',
                 message: '',
-                download: 'download'
+                download: 'download',
+                charset: ''
             };
             $.extend(true, settings, config);
             var _data = dt.rows().data();
@@ -508,13 +542,23 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
                     margin: [0, 0, 0, 12]
                 });
             }
+            
+            var charset = '';
+            if (settings.charset != '') {
+                charset = ';charset='+ settings.charset;
+            } else {
+                var cst = document.characterSet || document.charset;
+                charset = ';charset='+ cst;
+            }
+
             var pdf = window.pdfMake.createPdf(doc);
             if (config.download === 'open' && !isSafari()) {
                 pdf.open();
             } else {
                 pdf.getBuffer(function(buffer) {
                     var blob = new Blob([buffer], {
-                        mimeType: 'application/pdf'
+                        type: 'application/pdf'+ charset,
+                        encoding: charset
                     });
                     saveAs(blob, settings.filename + '.pdf');
                 });
@@ -588,7 +632,8 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
                 separator: ',',
                 title: '',
                 message: '',
-                filename: 'document'
+                filename: 'document',
+                charset: ''
             };
             $.extend(true, settings, config);
             var _data = dt.rows().data();
@@ -604,8 +649,18 @@ xmlns:css="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">\
                 output += "\t</Column>\n";
             }
             output += "</Data>";
+
+            var charset = '';
+            if (settings.charset != '') {
+                charset = ';charset='+ settings.charset;
+            } else {
+                var cst = document.characterSet || document.charset;
+                charset = ';charset='+ cst;
+            }
+
             saveAs(new Blob([output], {
-                mimeType: 'application/xml'
+                type: 'application/xml'+ charset,
+                encoding: charset
             }), settings.filename + '.xml');
         },
     };
