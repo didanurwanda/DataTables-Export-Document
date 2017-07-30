@@ -23,7 +23,7 @@ $('body').on('click', '#btn-export', function(e) {
         	'Join Date',
         	'Salary'
         ],
-        field: [
+        fields: [
         	0,
         	1,
         	4,
@@ -73,8 +73,8 @@ To Print `$.fn.DataTable.Export.print(dataTable, config)`
         '...'
     ],
     
-    // field
-    field: [
+    // fields
+    fields: [
     	0,
     	1,
     	4,
@@ -82,7 +82,7 @@ To Print `$.fn.DataTable.Export.print(dataTable, config)`
     	'...'
     ],
     // or
-    field: [
+    fields: [
     	'employe_id',
     	'name',
     	'....'    	
