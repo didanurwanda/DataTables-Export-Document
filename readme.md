@@ -40,7 +40,7 @@ $('body').on('click', '#btn-export', function(e) {
 
 To Word (.doc) `$.fn.DataTable.Export.word(dataTable, config)`
 
-To Excel (.xml) `$.fn.DataTable.Export.excel(dataTable, config)`
+To Excel (.xls) `$.fn.DataTable.Export.excel(dataTable, config)`
 
 To CSV (.csv) `$.fn.DataTable.Export.csv(dataTable, config)`
 
